@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+
+def langrange_interpolation(x, y, xi):
+    n = len(x)
+    result = 0.0
+    for i in range(n):
+        term = y[i]
+        for j in range(n):
+            if i != j:
+                term *= (xi - x[j]) / (x[i] - x[j])
+        result += term
+    return result
+
+# Nilai X (Tegangan) dan Nilai Y (Waktu Patah)
+data_x = [5, 10, 15, 20, 25, 30, 35, 40]
+data_y = [40, 30, 25, 40, 18, 20, 22, 15]
+
+# Menghasilkan titik-titik untuk plotting pada grafik
+range_x = range(5, 41) # Rentang nilai x untuk plot grafik hasil interpolasi
+interpolated_y = [langrange_interpolation(data_x, data_y, i) for i in range_x]
+
+# Plot titik-titik data
+plt.scatter(data_x, data_y, color='red', label='Titik Data')
+
+# Plot hasil interpolasi
+plt.plot(range_x, interpolated_y, color='blue', label='Garis Interpolasi')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Interpolasi Langrange')
+plt.legend()
+plt.grid(True)
+plt.show()
