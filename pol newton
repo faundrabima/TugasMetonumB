@@ -1,0 +1,69 @@
+import matplotlib.pyplot as plt
+
+def newton_interpolation(x, y, xi):
+    n = len(x)
+    result = y[0]
+    for i in range(1, n):
+        term = 1
+        for j in range(i):
+            term *= (xi - x[j])
+        divided_diff = 0
+        for j in range(i):
+            divided_diff += term / (x[i] - x[j])
+        result += divided_diff * y[i]
+    return result
+
+# Nilai X (Tegangan) dan Nilai Y (Waktu Patah)
+data_x = [5, 10, 15, 20, 25, 30, 35, 40]
+data_y = [40, 30, 25, 40, 18, 20, 22, 15]
+
+# Menghasilkan titik-titik untuk plotting pada grafik
+range_x = range(5, 41)  # Rentang nilai x untuk plot grafik hasil interpolasi
+interpolated_y = [newton_interpolation(data_x, data_y, i) for i in range_x]
+
+# Plot titik-titik data
+plt.scatter(data_x, data_y, color='red', label='Titik Data')
+
+# Plot hasil interpolasi
+plt.plot(range_x, interpolated_y, color='blue', label='Garis Interpolasi')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Interpolasi Newton')
+plt.legend()
+plt.grid(True)
+plt.show()import matplotlib.pyplot as plt
+
+def newton_interpolation(x, y, xi):
+    n = len(x)
+    result = y[0]
+    for i in range(1, n):
+        term = 1
+        for j in range(i):
+            term *= (xi - x[j])
+        divided_diff = 0
+        for j in range(i):
+            divided_diff += term / (x[i] - x[j])
+        result += divided_diff * y[i]
+    return result
+
+# Nilai X (Tegangan) dan Nilai Y (Waktu Patah)
+data_x = [5, 10, 15, 20, 25, 30, 35, 40]
+data_y = [40, 30, 25, 40, 18, 20, 22, 15]
+
+# Menghasilkan titik-titik untuk plotting pada grafik
+range_x = range(5, 41)  # Rentang nilai x untuk plot grafik hasil interpolasi
+interpolated_y = [newton_interpolation(data_x, data_y, i) for i in range_x]
+
+# Plot titik-titik data
+plt.scatter(data_x, data_y, color='red', label='Titik Data')
+
+# Plot hasil interpolasi
+plt.plot(range_x, interpolated_y, color='blue', label='Garis Interpolasi')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Interpolasi Newton')
+plt.legend()
+plt.grid(True)
+plt.show()
