@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+# Fungsi eksponensial
+def exponential_func(x, a, b):
+    return a * np.exp(b * x)
+
+# Data sampel
+x_data = np.array([7, 4, 8, 5, 7, 3, 7, 8, 5, 4])
+y_data = np.array([91, 65, 45, 36, 66, 61, 63, 42, 61, 69])
+
+# Fit model
+params, covariance = curve_fit(exponential_func, x_data, y_data)
+
+# Menampilkan parameter yang ditemukan
+print(f"Estimated parameters: a = {params[0]}, b = {params[1]}")
+
+# Menghasilkan y berdasarkan model yang ditemukan
+y_fit = exponential_func(x_data, *params)
+
+# Plot data asli dan model fit
+plt.title("Regresi Eksponensial")
+plt.scatter(x_data, y_data, label='Data')
+plt.plot(x_data, y_fit, color='red', label='Exponential fit')
+plt.xlabel('Durasi Waktu Belajar')
+plt.ylabel('Nilai Ujian')
+plt.legend()
+plt.show()
+
+mse = np.mean((y_data - y_fit) ** 2)
+rmse = np.sqrt(mse)
+print(f"Nilai Galat : {rmse}")
